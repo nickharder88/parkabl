@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "921812638836",
+    "firebase_url": "https://parkabl.firebaseio.com",
+    "project_id": "parkabl",
+    "storage_bucket": "parkabl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921812638836:android:1a51432d52b321a6e38521",
+        "android_client_info": {
+          "package_name": "com.nickharder88.parkabl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921812638836-4osnuqtc7aaqpt5qn9osojt2nk7rgrt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOcUD7mvdtuBLx-_jj5QVUg3Cy10-QoOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921812638836-4osnuqtc7aaqpt5qn9osojt2nk7rgrt7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
