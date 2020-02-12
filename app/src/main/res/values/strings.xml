@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">parkabl</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="welcome">Welcome to parkabl</string>
+    <string name="login_button">Login</string>
 </resources>
