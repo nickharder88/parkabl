@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">parkabl</string>
     <string name="welcome">Welcome to parkabl</string>
+
     <string name="login_button">Login</string>
     <string name="scan_button">Scan a License Plate</string>
     <string name="license_check_title">License Plate Checked</string>
