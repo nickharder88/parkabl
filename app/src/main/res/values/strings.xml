@@ -3,6 +3,7 @@
     <string name="welcome">Welcome to parkabl</string>
 
     <string name="login_button">Login</string>
+
     <string name="scan_button">Scan a License Plate</string>
     <string name="license_check_title">License Plate Checked</string>
     <string name="bad_license_check">Vehicle is parked illegally - tow immediately!</string>
@@ -15,4 +16,12 @@
     <string name="invalid_email">Not a valid email</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="new_vehicle">New Vehicle</string>
+    <string name="show_vehicles">Show Vehicles</string>
+
+    <string name="prompt_make">Make</string>
+    <string name="prompt_model">Model</string>
+    <string name="prompt_license">License Plate Number</string>
+    <string name="create_vehicle_button">Create Vehicle</string>
 </resources>

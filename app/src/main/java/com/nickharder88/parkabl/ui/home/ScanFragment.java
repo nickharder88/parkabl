@@ -1,4 +1,4 @@
-package com.nickharder88.parkabl;
+package com.nickharder88.parkabl.ui.home;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.nickharder88.parkabl.R;
 
 import static android.app.Activity.RESULT_OK;
 

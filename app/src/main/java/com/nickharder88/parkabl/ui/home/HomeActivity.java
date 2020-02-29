@@ -1,8 +1,10 @@
-package com.nickharder88.parkabl;
+package com.nickharder88.parkabl.ui.home;
 
 import androidx.fragment.app.Fragment;
 
-public class HomeActivity extends DoubleFragmentActivity {
+import com.nickharder88.parkabl.DoubleVerticalFragmentActivity;
+
+public class HomeActivity extends DoubleVerticalFragmentActivity {
 
     @Override
     protected Fragment createFragmentOne() { return new VehicleListFragment(); }

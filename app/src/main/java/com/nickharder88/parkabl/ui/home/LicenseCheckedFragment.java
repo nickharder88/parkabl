@@ -1,4 +1,4 @@
-package com.nickharder88.parkabl;
+package com.nickharder88.parkabl.ui.home;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.nickharder88.parkabl.R;
 
 import java.util.Objects;
 

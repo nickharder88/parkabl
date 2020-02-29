@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public abstract class DoubleFragmentActivity extends AppCompatActivity {
+public abstract class DoubleVerticalFragmentActivity extends AppCompatActivity {
 
     private final String TAG = "DoubleFragmentActivity";
 
