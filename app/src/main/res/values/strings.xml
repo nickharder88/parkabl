@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">parkabl</string>
     <string name="welcome">Welcome to parkabl</string>
+
     <string name="login_button">Login</string>
     <string name="scan_button">Scan a License Plate</string>
     <string name="license_check_title">License Plate Checked</string>
     <string name="bad_license_check">Vehicle is parked illegally - tow immediately!</string>
     <string name="good_license_check">Vehicle is parked legally!</string>
+
+    <string name="login_title">Login</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_email">Not a valid email</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

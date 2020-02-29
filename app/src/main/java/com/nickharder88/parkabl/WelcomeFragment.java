@@ -1,6 +1,7 @@
 package com.nickharder88.parkabl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,6 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.nickharder88.parkabl.data.LoginDataSource;
+import com.nickharder88.parkabl.data.LoginRepository;
+import com.nickharder88.parkabl.data.model.LoggedInUser;
+import com.nickharder88.parkabl.ui.login.LoginActivity;
 
 public class WelcomeFragment extends Fragment {
 
@@ -20,6 +27,11 @@ public class WelcomeFragment extends Fragment {
     private final String TAG = "WelcomeFragment";
 
     private Button mLoginButton;
+
+    private TextView mLoggedInTextView;
+
+    private LoginRepository loginRepository;
+
 
     @Override
     public void onAttach(Context context) {
@@ -30,6 +42,7 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.loginRepository = LoginRepository.getInstance(new LoginDataSource());
         Log.i(TAG, "Fragment in onCreate");
     }
 
@@ -38,10 +51,29 @@ public class WelcomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_welcome, container, false);
         mLoginButton = v.findViewById(R.id.login_button);
+        mLoggedInTextView = v.findViewById(R.id.logged_in_text_view);
+
+        if (loginRepository.isLoggedIn()) {
+            LoggedInUser user = loginRepository.getUser();
+
+            // disable if logged in
+            mLoginButton.setEnabled(false);
+            mLoginButton.setVisibility(View.GONE);
+            mLoggedInTextView.setVisibility(View.VISIBLE);
+            mLoggedInTextView.setText(user.getDisplayName());
+            Log.i("INFO", user.getDisplayName() == null ? "No Name" : user.getDisplayName());
+        } else {
+            mLoginButton.setEnabled(true);
+            mLoginButton.setVisibility(View.VISIBLE);
+            mLoggedInTextView.setVisibility(View.GONE);
+            mLoggedInTextView.setText("");
+        }
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // fire off intent for starting LoginActivity
+                loginRepository.logout();
+                final Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 
