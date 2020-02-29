@@ -5,14 +5,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.content.Intent;
 import android.util.Log;
 import android.util.Patterns;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.nickharder88.parkabl.HomeActivity;
 import com.nickharder88.parkabl.data.LoginRepository;
 import com.nickharder88.parkabl.data.model.LoggedInUser;
 import com.nickharder88.parkabl.R;
