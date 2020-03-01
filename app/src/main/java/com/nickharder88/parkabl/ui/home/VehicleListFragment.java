@@ -81,7 +81,7 @@ public class VehicleListFragment extends Fragment {
             @Override
             public VehicleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 Log.d(TAG, "in onCreateViewHolder");
-                return new VehicleHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_vehicle, parent, false));
+                return new VehicleHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_vehicle, parent, false), getActivity());
             }
 
             @Override

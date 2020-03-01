@@ -24,4 +24,6 @@
     <string name="prompt_model">Model</string>
     <string name="prompt_license">License Plate Number</string>
     <string name="create_vehicle_button">Create Vehicle</string>
+    <string name="update_vehicle_button">Update Vehicle</string>
+    <string name="delete_vehicle_button">Delete Vehicle</string>
 </resources>

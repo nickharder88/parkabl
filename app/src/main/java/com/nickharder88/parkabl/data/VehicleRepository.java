@@ -1,7 +1,6 @@
 package com.nickharder88.parkabl.data;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,29 +11,24 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.nickharder88.parkabl.data.model.Vehicle;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class VehicleRepository {
 
-    private final String TAG = "VehicleDatabase";
+    private final String TAG = "VehicleRepository";
 
     private FirebaseFirestore db;
     private Context mContext;
-    private List<Vehicle> mVehicles;
-    private boolean mGotVehicles;
 
     public VehicleRepository(Context context) {
         db = FirebaseFirestore.getInstance();
         mContext = context;
-        mGotVehicles = false;
     }
 
     public void addVehicle(Vehicle vehicle) {
@@ -61,35 +55,80 @@ public class VehicleRepository {
                 });
     }
 
-    public List<Vehicle> getVehicles() {
-        db.collection("vehicles").get()
+    public void updateVehicle(final Vehicle vehicle) {
+
+        Log.d(TAG, "Updating vehicle...");
+
+        db.collection("vehicles").whereEqualTo("license", vehicle.getLicense())
+                .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            mVehicles = task.getResult().toObjects(Vehicle.class);
-                            mGotVehicles = true;
-                            Log.d(TAG, mVehicles.toString());
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("make", vehicle.getMake());
+                            data.put("model", vehicle.getModel());
+                            data.put("license", vehicle.getLicense());
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                document.getReference().set(data)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error writing document", e);
+                                                makeToast("Vehicle not updated - try again.");
+                                            }
+                                        });
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
-                            makeToast("Error getting list of vehicles.");
+                            makeToast("Vehicle not updated - try again.");
                         }
                     }
                 });
 
-        return mVehicles;
     }
 
-    public List<Vehicle> getVehiclesAfterCompletion() {
-        while(!mGotVehicles) {};
-        return mVehicles;
-    }
+    public void deleteVehicle(final String license) {
 
-    public void updateVehicle(Vehicle vehicle) {
+        Log.d(TAG, "Deleting vehicle...");
 
-    }
-
-    public void deleteVehicle(Vehicle vehicle) {
+        db.collection("vehicles").whereEqualTo("license", license)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                document.getReference().delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error deleting document", e);
+                                                makeToast("Vehicle not deleted - try again.");
+                                            }
+                                        });
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            makeToast("Vehicle not deleted - try again.");
+                        }
+                    }
+                });
 
     }
 
