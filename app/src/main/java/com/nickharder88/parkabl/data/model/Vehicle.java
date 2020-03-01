@@ -6,6 +6,9 @@ public class Vehicle {
     private String model;
     private String license;
 
+    public Vehicle() {
+
+    }
 
     public Vehicle(String make, String model, String license) {
         this.make = make;
@@ -23,5 +26,17 @@ public class Vehicle {
 
     public String getLicense() {
         return license;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 }

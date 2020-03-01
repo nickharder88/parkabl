@@ -7,9 +7,4 @@
         android:title="@string/new_vehicle"
         app:showAsAction="ifRoom|withText"/>
 
-    <item
-        android:id="@+id/show_vehicles"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/show_vehicles"
-        app:showAsAction="ifRoom|withText"/>
 </menu>
