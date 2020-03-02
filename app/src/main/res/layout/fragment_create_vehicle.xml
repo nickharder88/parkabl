@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="50dp"
-    android:layout_marginTop="200dp"
-    android:layout_marginRight="50dp"
+    android:gravity="center"
+    android:layout_margin="50dp"
     android:orientation="vertical">
 
+
     <TextView
-        android:id="@+id/loginTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:text="@string/login_title"
-        android:textSize="24dp" />
+        android:layout_margin="20dp"
+        android:text="@string/create_vehicle_button"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email"
+    android:id="@+id/vehicle_make"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/prompt_make"
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vehicle_model"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_email"
-        app:errorEnabled="true">
+        android:hint="@string/prompt_model"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:inputType="textEmailAddress"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password"
+        android:id="@+id/vehicle_license"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_password"
-        app:errorEnabled="true">
+        android:hint="@string/prompt_license"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:inputType="textPassword" />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="@string/login_button" />
+        android:text="@string/create_vehicle_button" />
+
+
 </LinearLayout>

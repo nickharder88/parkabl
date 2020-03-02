@@ -1,7 +1,5 @@
 package com.nickharder88.parkabl.ui.login;
 
-import android.app.Activity;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,10 +22,8 @@ import android.widget.Toast;
 // Material
 import com.google.android.material.textfield.TextInputLayout;
 
+import com.nickharder88.parkabl.ui.home.HomeActivity;
 import com.nickharder88.parkabl.R;
-import com.nickharder88.parkabl.WelcomeActivity;
-import com.nickharder88.parkabl.ui.login.LoginViewModel;
-import com.nickharder88.parkabl.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        final Intent intent = new Intent(this, WelcomeActivity.class);
+        final Intent intent = new Intent(this, HomeActivity.class);
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {

@@ -1,4 +1,4 @@
-package com.nickharder88.parkabl;
+package com.nickharder88.parkabl.ui.welcome;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.LoginDataSource;
 import com.nickharder88.parkabl.data.LoginRepository;
 import com.nickharder88.parkabl.data.model.LoggedInUser;
