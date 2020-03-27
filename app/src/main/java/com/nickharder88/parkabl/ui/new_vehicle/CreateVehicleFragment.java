@@ -26,6 +26,7 @@ public class CreateVehicleFragment extends Fragment {
     private TextInputLayout mMakeText;
     private TextInputLayout mModelText;
     private TextInputLayout mLicenseText;
+    private TextInputLayout mLocationText;
 
     @Nullable
     @Override
@@ -35,6 +36,7 @@ public class CreateVehicleFragment extends Fragment {
         mMakeText = v.findViewById(R.id.vehicle_make);
         mModelText = v.findViewById(R.id.vehicle_model);
         mLicenseText = v.findViewById(R.id.vehicle_license);
+        mLocationText = v.findViewById(R.id.vehicle_location);
 
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +45,9 @@ public class CreateVehicleFragment extends Fragment {
                 String vehicleMake = mMakeText.getEditText().getText().toString();
                 String vehicleModel = mModelText.getEditText().getText().toString();
                 String vehicleLicense = mLicenseText.getEditText().getText().toString();
+                String vehicleLocation = mLocationText.getEditText().getText().toString();
 
-                Vehicle toAdd = new Vehicle(vehicleMake, vehicleModel, vehicleLicense);
+                Vehicle toAdd = new Vehicle(vehicleMake, vehicleModel, vehicleLicense, vehicleLocation);
                 VehicleRepository repo = new VehicleRepository(getContext());
                 repo.addVehicle(toAdd);
 

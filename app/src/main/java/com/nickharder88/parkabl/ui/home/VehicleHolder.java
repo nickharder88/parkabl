@@ -18,6 +18,7 @@ public class VehicleHolder extends RecyclerView.ViewHolder {
     private TextView mMake;
     private TextView mModel;
     private TextView mLicense;
+    private TextView mLocation;
 
     private Vehicle mVehicle;
 
@@ -26,11 +27,12 @@ public class VehicleHolder extends RecyclerView.ViewHolder {
         mMake = itemView.findViewById(R.id.vehicle_make);
         mModel = itemView.findViewById(R.id.vehicle_model);
         mLicense = itemView.findViewById(R.id.vehicle_license);
+        mLocation = itemView.findViewById(R.id.vehicle_location);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = UpdateVehicleActivity.newIntent(activity, mMake.getText().toString(), mModel.getText().toString(), mLicense.getText().toString());
+                Intent intent = UpdateVehicleActivity.newIntent(activity, mMake.getText().toString(), mModel.getText().toString(), mLicense.getText().toString(), mLocation.getText().toString());
                 activity.startActivity(intent);
             }
         });
@@ -41,5 +43,6 @@ public class VehicleHolder extends RecyclerView.ViewHolder {
         mMake.setText(mVehicle.getMake());
         mModel.setText(mVehicle.getModel());
         mLicense.setText(mVehicle.getLicense());
+        mLocation.setText(mVehicle.getLocation());
     }
 }

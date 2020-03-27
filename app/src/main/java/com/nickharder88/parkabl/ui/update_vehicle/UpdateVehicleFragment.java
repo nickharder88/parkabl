@@ -25,16 +25,19 @@ public class UpdateVehicleFragment extends Fragment {
     private static final String ARG_VEHICLE_MAKE = "vehicle_make";
     private static final String ARG_VEHICLE_MODEL = "vehicle_model";
     private static final String ARG_VEHICLE_LICENSE = "vehicle_license";
+    private static final String ARG_VEHICLE_LOCATION = "vehicle_location";
 
     private Button mUpdateButton;
     private Button mDeleteButton;
     private TextInputLayout mMakeText;
     private TextInputLayout mModelText;
     private TextInputLayout mLicenseText;
+    private TextInputLayout mLocationText;
 
     private String mMake;
     private String mModel;
     private String mLicense;
+    private String mLocation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class UpdateVehicleFragment extends Fragment {
         mMake = getArguments().getSerializable(ARG_VEHICLE_MAKE).toString();
         mModel = getArguments().getSerializable(ARG_VEHICLE_MODEL).toString();
         mLicense = getArguments().getSerializable(ARG_VEHICLE_LICENSE).toString();
+        mLocation = getArguments().getSerializable(ARG_VEHICLE_LOCATION).toString();
     }
 
     @Nullable
@@ -54,10 +58,12 @@ public class UpdateVehicleFragment extends Fragment {
         mMakeText = v.findViewById(R.id.vehicle_make);
         mModelText = v.findViewById(R.id.vehicle_model);
         mLicenseText = v.findViewById(R.id.vehicle_license);
+        mLocationText = v.findViewById(R.id.vehicle_location);
 
         mMakeText.getEditText().setText(mMake);
         mModelText.getEditText().setText(mModel);
         mLicenseText.getEditText().setText(mLicense);
+        mLocationText.getEditText().setText(mLocation);
 
 
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
@@ -66,8 +72,9 @@ public class UpdateVehicleFragment extends Fragment {
                 String vehicleMake = mMakeText.getEditText().getText().toString();
                 String vehicleModel = mModelText.getEditText().getText().toString();
                 String vehicleLicense = mLicenseText.getEditText().getText().toString();
+                String vehicleLocation = mLocationText.getEditText().getText().toString();
 
-                Vehicle toUpdate = new Vehicle(vehicleMake, vehicleModel, vehicleLicense);
+                Vehicle toUpdate = new Vehicle(vehicleMake, vehicleModel, vehicleLicense, vehicleLocation);
                 VehicleRepository repo = new VehicleRepository(getContext());
                 repo.updateVehicle(toUpdate);
 
@@ -93,11 +100,12 @@ public class UpdateVehicleFragment extends Fragment {
         return v;
     }
 
-    public static UpdateVehicleFragment newInstance(String make, String model, String license) {
+    public static UpdateVehicleFragment newInstance(String make, String model, String license, String location) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_VEHICLE_MAKE, make);
         args.putSerializable(ARG_VEHICLE_MODEL, model);
         args.putSerializable(ARG_VEHICLE_LICENSE, license);
+        args.putSerializable(ARG_VEHICLE_LOCATION, location);
 
 
         UpdateVehicleFragment fragment = new UpdateVehicleFragment();

@@ -36,6 +36,7 @@ public class VehicleRepository {
         data.put("make", vehicle.getMake());
         data.put("model", vehicle.getModel());
         data.put("license", vehicle.getLicense());
+        data.put("location", vehicle.getLocation());
 
         db.collection("vehicles")
                 .add(data)
@@ -69,6 +70,7 @@ public class VehicleRepository {
                             data.put("make", vehicle.getMake());
                             data.put("model", vehicle.getModel());
                             data.put("license", vehicle.getLicense());
+                            data.put("location", vehicle.getLocation());
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
