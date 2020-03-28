@@ -1,5 +1,6 @@
 package com.nickharder88.parkabl.data;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Continuation;
@@ -22,11 +23,11 @@ public class LoginDataSource {
         return mAuth.signInWithEmailAndPassword(email, password).continueWith(new Continuation<AuthResult, LoggedInUser>() {
             @Override
             public LoggedInUser then(@NonNull Task<AuthResult> task) throws Exception {
-                if (task.isSuccessful()) {
-                    FirebaseUser fbaseUser = mAuth.getCurrentUser();
+                FirebaseUser fbaseUser = mAuth.getCurrentUser();
+                if (task.isSuccessful() && fbaseUser != null) {
                     return new LoggedInUser(fbaseUser.getUid(), fbaseUser.getEmail());
                 } else {
-                    throw new Error(new IOException("Error logging in", task.getException()));
+                    throw new IOException();
                 }
             }
         });

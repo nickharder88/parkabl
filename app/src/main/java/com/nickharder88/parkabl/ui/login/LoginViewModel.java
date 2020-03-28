@@ -39,7 +39,6 @@ public class LoginViewModel extends ViewModel {
         result.addOnSuccessListener(new OnSuccessListener<LoggedInUser>() {
             @Override
             public void onSuccess(LoggedInUser loggedInUser) {
-                Log.i("INFO", loggedInUser.getUserId());
                 // fire off intent for starting LoginActivity
                 loginResult.setValue(new LoginResult(new LoggedInUserView(loggedInUser.getDisplayName())));
             }
@@ -48,19 +47,20 @@ public class LoginViewModel extends ViewModel {
         result.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.i("INFO", "FAILED TO LOGIN");
                 loginResult.setValue(new LoginResult(R.string.login_failed));
             }
         });
     }
 
     public void loginDataChanged(String username, String password) {
-        if (!isEmailValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_email, null));
-        } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
+        if (isEmailValid(username)) {
+            if (!password.isEmpty()) {
+                loginFormState.setValue(new LoginFormState(true));
+            } else {
+                loginFormState.setValue(new LoginFormState(null, null));
+            }
         } else {
-            loginFormState.setValue(new LoginFormState(true));
+            loginFormState.setValue(new LoginFormState(R.string.invalid_email, null));
         }
     }
 
@@ -69,11 +69,8 @@ public class LoginViewModel extends ViewModel {
         if (email == null) {
             return false;
         }
-        if (email.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        } else {
-            return !email.trim().isEmpty();
-        }
+
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     // A placeholder password validation check

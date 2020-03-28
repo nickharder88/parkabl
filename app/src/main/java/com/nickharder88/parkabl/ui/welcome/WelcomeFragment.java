@@ -62,7 +62,6 @@ public class WelcomeFragment extends Fragment {
             mLoginButton.setVisibility(View.GONE);
             mLoggedInTextView.setVisibility(View.VISIBLE);
             mLoggedInTextView.setText(user.getDisplayName());
-            Log.i("INFO", user.getDisplayName() == null ? "No Name" : user.getDisplayName());
         } else {
             mLoginButton.setEnabled(true);
             mLoginButton.setVisibility(View.VISIBLE);

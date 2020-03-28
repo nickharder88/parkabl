@@ -1,5 +1,6 @@
 package com.nickharder88.parkabl.ui.login;
 
+import android.util.Log;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,11 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 // Material
@@ -52,9 +50,14 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getEmailError() != null) {
                     emailInputLayout.setError(getString(loginFormState.getEmailError()));
+                } else {
+                    emailInputLayout.setError(null);
                 }
+
                 if (loginFormState.getPasswordError() != null) {
                     passwordInputLayout.setError(getString(loginFormState.getPasswordError()));
+                } else {
+                    passwordInputLayout.setError(null);
                 }
             }
         });
@@ -97,16 +100,6 @@ public class LoginActivity extends AppCompatActivity {
 
         emailInputLayout.getEditText().addTextChangedListener(afterTextChangedListener);
         passwordInputLayout.getEditText().addTextChangedListener(afterTextChangedListener);
-        passwordInputLayout.getEditText().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(emailInputLayout.getEditText().getText().toString(),
-                            passwordInputLayout.getEditText().getText().toString());
-                }
-                return false;
-            }
-        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
