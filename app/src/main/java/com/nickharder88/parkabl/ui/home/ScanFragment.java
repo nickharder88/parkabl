@@ -9,7 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ public class ScanFragment extends Fragment {
 
     private Bitmap licenseToScan;
 
-    private Button mScanButton;
+    private FloatingActionButton mScanButton;
 
     @Nullable
     @Override
