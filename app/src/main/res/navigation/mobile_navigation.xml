@@ -23,5 +23,5 @@
     </fragment>
     <fragment android:id="@+id/homeNextFragment"
               android:name="com.nickharder88.parkabl.ui.main.home_next.HomeNextFragment"
-              android:label="fragment_home_next" tools:layout="@layout/fragment_home_next"/>
+              android:label="Home" tools:layout="@layout/fragment_home_next"/>
 </navigation>
