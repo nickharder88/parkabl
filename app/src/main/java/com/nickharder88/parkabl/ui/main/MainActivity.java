@@ -2,6 +2,7 @@ package com.nickharder88.parkabl.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -55,6 +56,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // listen for logout
+        MenuItem menuItemLogout = navigationView.getMenu().findItem(R.id.logout);
+        menuItemLogout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                mFirebaseAuth.signOut();
+                return true;
+            }
+        });
     }
 
     @Override
