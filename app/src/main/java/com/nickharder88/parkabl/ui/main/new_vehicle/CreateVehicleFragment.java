@@ -1,4 +1,4 @@
-package com.nickharder88.parkabl.ui.new_vehicle;
+package com.nickharder88.parkabl.ui.main.new_vehicle;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.navigation.Navigation;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.VehicleRepository;
 import com.nickharder88.parkabl.data.model.Vehicle;
-import com.nickharder88.parkabl.ui.home.HomeActivity;
+import com.nickharder88.parkabl.ui.main.home.HomeFragment;
 
 public class CreateVehicleFragment extends Fragment {
 
@@ -41,7 +42,6 @@ public class CreateVehicleFragment extends Fragment {
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String vehicleMake = mMakeText.getEditText().getText().toString();
                 String vehicleModel = mModelText.getEditText().getText().toString();
                 String vehicleLicense = mLicenseText.getEditText().getText().toString();
@@ -51,12 +51,10 @@ public class CreateVehicleFragment extends Fragment {
                 VehicleRepository repo = new VehicleRepository(getContext());
                 repo.addVehicle(toAdd);
 
-                final Intent intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
+                Navigation.findNavController(v).navigate(R.id.action_createVehicleFragment_to_homeFragment);
             }
         });
 
-        Log.i(TAG, "Fragment in onCreateView");
         return v;
     }
 }

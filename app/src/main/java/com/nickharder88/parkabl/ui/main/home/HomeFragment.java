@@ -1,20 +1,26 @@
-package com.nickharder88.parkabl.ui.home;
+package com.nickharder88.parkabl.ui.main.home;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.nickharder88.parkabl.R;
 
-public class HomeActivity extends AppCompatActivity  {
+public class HomeFragment extends Fragment {
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        FragmentManager fm = getSupportFragmentManager();
+        // Add Child Fragments
+        FragmentManager fm = getChildFragmentManager();
         Fragment location = fm.findFragmentById(R.id.fragment_location);
         Fragment vehicleList = fm.findFragmentById(R.id.fragment_vehicle_list);
         Fragment scan = fm.findFragmentById(R.id.fragment_scan);
@@ -28,5 +34,7 @@ public class HomeActivity extends AppCompatActivity  {
         if (scan == null) {
             fm.beginTransaction().add(R.id.fragment_scan, new ScanFragment()).commit();
         }
+
+        return view;
     }
 }

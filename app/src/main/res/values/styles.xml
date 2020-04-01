@@ -8,5 +8,11 @@
             <item name="colorAccent">@color/colorAccent</item>
         -->
     </style>
+    <style name="Theme.parkabl.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.parkabl.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.parkabl.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

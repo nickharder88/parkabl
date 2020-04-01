@@ -1,4 +1,4 @@
-package com.nickharder88.parkabl.ui.update_vehicle;
+package com.nickharder88.parkabl.ui.main.update_vehicle;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,20 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.navigation.Navigation;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.VehicleRepository;
 import com.nickharder88.parkabl.data.model.Vehicle;
-import com.nickharder88.parkabl.ui.home.HomeActivity;
+import com.nickharder88.parkabl.ui.main.home.HomeFragment;
 
 public class UpdateVehicleFragment extends Fragment {
 
 
     private final String TAG = "UpdateVehicleFragment";
-    private static final String ARG_VEHICLE_MAKE = "vehicle_make";
-    private static final String ARG_VEHICLE_MODEL = "vehicle_model";
-    private static final String ARG_VEHICLE_LICENSE = "vehicle_license";
-    private static final String ARG_VEHICLE_LOCATION = "vehicle_location";
 
     private Button mUpdateButton;
     private Button mDeleteButton;
@@ -34,19 +31,9 @@ public class UpdateVehicleFragment extends Fragment {
     private TextInputLayout mLicenseText;
     private TextInputLayout mLocationText;
 
-    private String mMake;
-    private String mModel;
-    private String mLicense;
-    private String mLocation;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mMake = getArguments().getSerializable(ARG_VEHICLE_MAKE).toString();
-        mModel = getArguments().getSerializable(ARG_VEHICLE_MODEL).toString();
-        mLicense = getArguments().getSerializable(ARG_VEHICLE_LICENSE).toString();
-        mLocation = getArguments().getSerializable(ARG_VEHICLE_LOCATION).toString();
     }
 
     @Nullable
@@ -60,10 +47,10 @@ public class UpdateVehicleFragment extends Fragment {
         mLicenseText = v.findViewById(R.id.vehicle_license);
         mLocationText = v.findViewById(R.id.vehicle_location);
 
-        mMakeText.getEditText().setText(mMake);
-        mModelText.getEditText().setText(mModel);
-        mLicenseText.getEditText().setText(mLicense);
-        mLocationText.getEditText().setText(mLocation);
+        mMakeText.getEditText().setText(R.string.make);
+        mModelText.getEditText().setText(R.string.model);
+        mLicenseText.getEditText().setText(R.string.license);
+        mLocationText.getEditText().setText(R.string.location);
 
 
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +65,7 @@ public class UpdateVehicleFragment extends Fragment {
                 VehicleRepository repo = new VehicleRepository(getContext());
                 repo.updateVehicle(toUpdate);
 
-                final Intent intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
+                Navigation.findNavController(v).navigate(R.id.action_updateVehicleFragment_to_homeFragment);
             }
         });
 
@@ -91,25 +77,9 @@ public class UpdateVehicleFragment extends Fragment {
                 VehicleRepository repo = new VehicleRepository(getContext());
                 repo.deleteVehicle(vehicleLicense);
 
-                final Intent intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
+                Navigation.findNavController(v).navigate(R.id.action_updateVehicleFragment_to_homeFragment);
             }
         });
-
-        Log.i(TAG, "Fragment in onCreateView");
         return v;
-    }
-
-    public static UpdateVehicleFragment newInstance(String make, String model, String license, String location) {
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_VEHICLE_MAKE, make);
-        args.putSerializable(ARG_VEHICLE_MODEL, model);
-        args.putSerializable(ARG_VEHICLE_LICENSE, license);
-        args.putSerializable(ARG_VEHICLE_LOCATION, location);
-
-
-        UpdateVehicleFragment fragment = new UpdateVehicleFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 }
