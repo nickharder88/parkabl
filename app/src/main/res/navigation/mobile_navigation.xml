@@ -21,4 +21,7 @@
               android:label="Update Vehicle" tools:layout="@layout/fragment_update_vehicle">
         <action android:id="@+id/action_updateVehicleFragment_to_homeFragment" app:destination="@id/homeFragment"/>
     </fragment>
+    <fragment android:id="@+id/homeNextFragment"
+              android:name="com.nickharder88.parkabl.ui.main.home_next.HomeNextFragment"
+              android:label="fragment_home_next" tools:layout="@layout/fragment_home_next"/>
 </navigation>
