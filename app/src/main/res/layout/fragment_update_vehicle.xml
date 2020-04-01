@@ -18,7 +18,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_make"
+        android:hint="@string/make"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -33,7 +33,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_model"
+        android:hint="@string/model"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,7 +48,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_license"
+        android:hint="@string/license"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +63,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_location"
+        android:hint="@string/location"
         >
 
         <com.google.android.material.textfield.TextInputEditText

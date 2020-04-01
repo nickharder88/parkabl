@@ -1,4 +1,4 @@
-package com.nickharder88.parkabl.ui.home;
+package com.nickharder88.parkabl.ui.main.home;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;

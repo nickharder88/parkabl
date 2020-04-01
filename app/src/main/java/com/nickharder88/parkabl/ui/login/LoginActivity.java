@@ -22,13 +22,13 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.nickharder88.parkabl.ui.home.HomeActivity;
+import com.nickharder88.parkabl.ui.main.MainActivity;
 import com.nickharder88.parkabl.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private FirebaseAuth.AuthStateListener authListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,17 +36,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // Navigate to Home if logged In
         final FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-        final Intent intent = new Intent(this, HomeActivity.class);
-        mFirebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+        final Intent intent = new Intent(this, MainActivity.class);
+        authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
                     startActivity(intent);
-                } else {
-                    Log.i("TAG", "No User");
                 }
             }
-        });
+        };
+        mFirebaseAuth.addAuthStateListener(authListener);
 
         setContentView(R.layout.activity_login);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
@@ -125,6 +124,16 @@ public class LoginActivity extends AppCompatActivity {
                         passwordInputLayout.getEditText().getText().toString());
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (authListener != null) {
+            FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+            mFirebaseAuth.removeAuthStateListener(authListener);
+        }
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
