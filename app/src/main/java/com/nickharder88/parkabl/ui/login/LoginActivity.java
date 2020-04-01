@@ -1,6 +1,7 @@
 package com.nickharder88.parkabl.ui.login;
 
 import android.util.Log;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -20,6 +21,8 @@ import android.widget.Toast;
 // Material
 import com.google.android.material.textfield.TextInputLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.nickharder88.parkabl.ui.home.HomeActivity;
 import com.nickharder88.parkabl.R;
 
@@ -30,6 +33,21 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Navigate to Home if logged In
+        final FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        final Intent intent = new Intent(this, HomeActivity.class);
+        mFirebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    startActivity(intent);
+                } else {
+                    Log.i("TAG", "No User");
+                }
+            }
+        });
+
         setContentView(R.layout.activity_login);
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -62,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        final Intent intent = new Intent(this, HomeActivity.class);
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
