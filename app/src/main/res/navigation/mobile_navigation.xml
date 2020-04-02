@@ -23,8 +23,11 @@
     </fragment>
     <fragment android:id="@+id/homeNextFragment"
               android:name="com.nickharder88.parkabl.ui.main.home_next.HomeNextFragment"
-              android:label="Home" tools:layout="@layout/fragment_home_next"/>
+              android:label="Home" tools:layout="@layout/fragment_home_next">
+        <action android:id="@+id/action_homeNextFragment_to_propertyFragment" app:destination="@id/propertyFragment"/>
+    </fragment>
     <fragment android:id="@+id/propertyFragment"
               android:name="com.nickharder88.parkabl.ui.main.property.PropertyFragment"
-              android:label="Property" tools:layout="@layout/fragment_property"/>
+              android:label="Property" tools:layout="@layout/fragment_property">
+    </fragment>
 </navigation>

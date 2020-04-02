@@ -14,6 +14,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.nickharder88.parkabl.data.dto.VehicleDTO;
 import com.nickharder88.parkabl.data.model.Vehicle;
 
 import java.util.HashMap;
@@ -31,12 +32,11 @@ public class VehicleRepository {
         mContext = context;
     }
 
-    public void addVehicle(Vehicle vehicle) {
+    public void add(VehicleDTO vehicle) {
         Map<String, Object> data = new HashMap<>();
-        data.put("make", vehicle.getMake());
-        data.put("model", vehicle.getModel());
-        data.put("license", vehicle.getLicense());
-        data.put("location", vehicle.getLocation());
+        data.put("make", vehicle.make);
+        data.put("model", vehicle.model);
+        data.put("license", vehicle.license);
 
         db.collection("vehicles")
                 .add(data)
@@ -56,24 +56,19 @@ public class VehicleRepository {
                 });
     }
 
-    public void updateVehicle(final Vehicle vehicle) {
-
-        Log.d(TAG, "Updating vehicle...");
-
-        db.collection("vehicles").whereEqualTo("license", vehicle.getLicense())
+    public void update(final VehicleDTO vehicle) {
+        db.collection("vehicles").whereEqualTo("license", vehicle.license)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             Map<String, Object> data = new HashMap<>();
-                            data.put("make", vehicle.getMake());
-                            data.put("model", vehicle.getModel());
-                            data.put("license", vehicle.getLicense());
-                            data.put("location", vehicle.getLocation());
+                            data.put("make", vehicle.make);
+                            data.put("model", vehicle.model);
+                            data.put("license", vehicle.license);
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
                                 document.getReference().set(data)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -98,10 +93,8 @@ public class VehicleRepository {
 
     }
 
-    public void deleteVehicle(final String license) {
-
+    public void delete(final String license) {
         Log.d(TAG, "Deleting vehicle...");
-
         db.collection("vehicles").whereEqualTo("license", license)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

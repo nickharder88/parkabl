@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.VehicleRepository;
+import com.nickharder88.parkabl.data.dto.VehicleDTO;
 import com.nickharder88.parkabl.data.model.Vehicle;
 import com.nickharder88.parkabl.ui.main.home.HomeFragment;
 
@@ -27,7 +28,6 @@ public class CreateVehicleFragment extends Fragment {
     private TextInputLayout mMakeText;
     private TextInputLayout mModelText;
     private TextInputLayout mLicenseText;
-    private TextInputLayout mLocationText;
 
     @Nullable
     @Override
@@ -37,7 +37,6 @@ public class CreateVehicleFragment extends Fragment {
         mMakeText = v.findViewById(R.id.vehicle_make);
         mModelText = v.findViewById(R.id.vehicle_model);
         mLicenseText = v.findViewById(R.id.vehicle_license);
-        mLocationText = v.findViewById(R.id.vehicle_location);
 
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +44,15 @@ public class CreateVehicleFragment extends Fragment {
                 String vehicleMake = mMakeText.getEditText().getText().toString();
                 String vehicleModel = mModelText.getEditText().getText().toString();
                 String vehicleLicense = mLicenseText.getEditText().getText().toString();
-                String vehicleLocation = mLocationText.getEditText().getText().toString();
 
-                Vehicle toAdd = new Vehicle(vehicleMake, vehicleModel, vehicleLicense, vehicleLocation);
+                VehicleDTO dto = new VehicleDTO();
+                dto.make = vehicleMake;
+                dto.model = vehicleModel;
+                dto.license = vehicleLicense;
+
+
                 VehicleRepository repo = new VehicleRepository(getContext());
-                repo.addVehicle(toAdd);
+                repo.add(dto);
 
                 Navigation.findNavController(v).navigate(R.id.action_createVehicleFragment_to_homeFragment);
             }

@@ -48,4 +48,5 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_activity_home_next">Home</string>
+    <string name="view_property">View Property</string>
 </resources>

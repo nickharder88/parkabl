@@ -20,6 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.nickharder88.parkabl.R;
+import com.nickharder88.parkabl.data.dto.VehicleDTO;
 import com.nickharder88.parkabl.data.model.Vehicle;
 
 public class VehicleListFragment extends Fragment {
@@ -47,12 +48,12 @@ public class VehicleListFragment extends Fragment {
     private RecyclerView.Adapter updateUI() {
         Query query = FirebaseFirestore.getInstance().collection("vehicles");
 
-        FirestoreRecyclerOptions<Vehicle> response = new FirestoreRecyclerOptions.Builder<Vehicle>()
-                .setQuery(query, Vehicle.class)
+        FirestoreRecyclerOptions<VehicleDTO> response = new FirestoreRecyclerOptions.Builder<VehicleDTO>()
+                .setQuery(query, VehicleDTO.class)
                 .setLifecycleOwner(this)
                 .build();
 
-        return new FirestoreRecyclerAdapter<Vehicle, VehicleHolder>(response) {
+        return new FirestoreRecyclerAdapter<VehicleDTO, VehicleHolder>(response) {
             @NonNull
             @Override
             public VehicleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,7 +61,7 @@ public class VehicleListFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull VehicleHolder holder, int position, @NonNull Vehicle model) {
+            protected void onBindViewHolder(@NonNull VehicleHolder holder, int position, @NonNull VehicleDTO model) {
                 holder.bind(model);
             }
         };
