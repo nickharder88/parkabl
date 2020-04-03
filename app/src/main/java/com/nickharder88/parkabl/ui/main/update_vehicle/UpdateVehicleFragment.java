@@ -1,8 +1,6 @@
 package com.nickharder88.parkabl.ui.main.update_vehicle;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +14,9 @@ import androidx.navigation.Navigation;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.VehicleRepository;
-import com.nickharder88.parkabl.data.model.Vehicle;
-import com.nickharder88.parkabl.ui.main.home.HomeFragment;
+import com.nickharder88.parkabl.data.dto.VehicleDTO;
 
 public class UpdateVehicleFragment extends Fragment {
-
 
     private final String TAG = "UpdateVehicleFragment";
 
@@ -29,7 +25,6 @@ public class UpdateVehicleFragment extends Fragment {
     private TextInputLayout mMakeText;
     private TextInputLayout mModelText;
     private TextInputLayout mLicenseText;
-    private TextInputLayout mLocationText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,12 +40,10 @@ public class UpdateVehicleFragment extends Fragment {
         mMakeText = v.findViewById(R.id.vehicle_make);
         mModelText = v.findViewById(R.id.vehicle_model);
         mLicenseText = v.findViewById(R.id.vehicle_license);
-        mLocationText = v.findViewById(R.id.vehicle_location);
 
         mMakeText.getEditText().setText(R.string.make);
         mModelText.getEditText().setText(R.string.model);
         mLicenseText.getEditText().setText(R.string.license);
-        mLocationText.getEditText().setText(R.string.location);
 
 
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +52,14 @@ public class UpdateVehicleFragment extends Fragment {
                 String vehicleMake = mMakeText.getEditText().getText().toString();
                 String vehicleModel = mModelText.getEditText().getText().toString();
                 String vehicleLicense = mLicenseText.getEditText().getText().toString();
-                String vehicleLocation = mLocationText.getEditText().getText().toString();
 
-                Vehicle toUpdate = new Vehicle(vehicleMake, vehicleModel, vehicleLicense, vehicleLocation);
+                VehicleDTO dto = new VehicleDTO();
+                dto.make = vehicleMake;
+                dto.model = vehicleModel;
+                dto.license = vehicleLicense;
+
                 VehicleRepository repo = new VehicleRepository(getContext());
-                repo.updateVehicle(toUpdate);
+                repo.update(dto);
 
                 Navigation.findNavController(v).navigate(R.id.action_updateVehicleFragment_to_homeFragment);
             }
@@ -75,7 +71,7 @@ public class UpdateVehicleFragment extends Fragment {
                 String vehicleLicense = mLicenseText.getEditText().getText().toString();
 
                 VehicleRepository repo = new VehicleRepository(getContext());
-                repo.deleteVehicle(vehicleLicense);
+                repo.delete(vehicleLicense);
 
                 Navigation.findNavController(v).navigate(R.id.action_updateVehicleFragment_to_homeFragment);
             }
