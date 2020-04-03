@@ -4,18 +4,9 @@
       tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-                android:id="@id/homeFragment"
-                android:icon="@drawable/ic_home_black_24dp"
-                android:title="@string/menu_home"/>
-        <item
                 android:id="@id/homeNextFragment"
                 android:icon="@drawable/ic_map_white_24dp"
                 android:title="@string/menu_map"
-            />
-        <item
-                android:id="@id/propertyFragment"
-                android:icon="@drawable/ic_home_black_24dp"
-                android:title="Property"
             />
         <item
                 android:id="@+id/logout"
