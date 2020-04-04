@@ -4,23 +4,6 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mobile_navigation"
             app:startDestination="@id/homeNextFragment">
-    <fragment android:id="@+id/homeFragment" android:name="com.nickharder88.parkabl.ui.main.home.HomeFragment"
-              android:label="Home" tools:layout="@layout/fragment_home">
-        <action android:id="@+id/action_homeFragment_to_createVehicleFragment"
-                app:destination="@id/createVehicleFragment"/>
-        <action android:id="@+id/action_homeFragment_to_updateVehicleFragment"
-                app:destination="@id/updateVehicleFragment"/>
-    </fragment>
-    <fragment android:id="@+id/createVehicleFragment"
-              android:name="com.nickharder88.parkabl.ui.main.new_vehicle.CreateVehicleFragment"
-              android:label="Create Vehicle" tools:layout="@layout/fragment_create_vehicle">
-        <action android:id="@+id/action_createVehicleFragment_to_homeFragment" app:destination="@id/homeFragment"/>
-    </fragment>
-    <fragment android:id="@+id/updateVehicleFragment"
-              android:name="com.nickharder88.parkabl.ui.main.update_vehicle.UpdateVehicleFragment"
-              android:label="Update Vehicle" tools:layout="@layout/fragment_update_vehicle">
-        <action android:id="@+id/action_updateVehicleFragment_to_homeFragment" app:destination="@id/homeFragment"/>
-    </fragment>
     <fragment android:id="@+id/homeNextFragment"
               android:name="com.nickharder88.parkabl.ui.main.home_next.HomeNextFragment"
               android:label="Home" tools:layout="@layout/fragment_home_next">

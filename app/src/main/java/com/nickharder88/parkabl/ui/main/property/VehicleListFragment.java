@@ -1,20 +1,12 @@
-package com.nickharder88.parkabl.ui.main.home;
+package com.nickharder88.parkabl.ui.main.property;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.view.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,13 +32,18 @@ public class VehicleListFragment extends Fragment {
 
         mVehicleRecyclerView = view.findViewById(R.id.vehicle_recycler_view);
         mVehicleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         mVehicleRecyclerView.setAdapter(updateUI());
         return view;
     }
 
     private RecyclerView.Adapter updateUI() {
-        Query query = FirebaseFirestore.getInstance().collection("vehicles");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Query query = db.collection(Vehicle.collection).where();
+
+        // Get Property
+        // Get Tenants At Property
+        // Get Vehicles for each Tenant
 
         FirestoreRecyclerOptions<VehicleDTO> response = new FirestoreRecyclerOptions.Builder<VehicleDTO>()
                 .setQuery(query, VehicleDTO.class)
@@ -66,22 +63,5 @@ public class VehicleListFragment extends Fragment {
             }
         };
 
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_vehicle_list, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.new_vehicle:
-                NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_createVehicleFragment);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

@@ -1,11 +1,9 @@
-package com.nickharder88.parkabl.ui.main.home;
+package com.nickharder88.parkabl.ui.main.property;
 
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.dto.VehicleDTO;
 

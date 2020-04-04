@@ -13,6 +13,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
         />
+        <FrameLayout
+            android:id="@+id/fragment_card_landlord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+        <FrameLayout
+            android:id="@+id/fragment_vehicle_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
     </LinearLayout>
     <FrameLayout
         android:id="@+id/fragment_scan"

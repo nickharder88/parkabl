@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import com.nickharder88.parkabl.R;
 import com.nickharder88.parkabl.data.model.Property;
 import com.nickharder88.parkabl.ui.main.fragments.cards.CardAddressFragment;
+import com.nickharder88.parkabl.ui.main.fragments.cards.CardLandlordFragment;
 
 public class PropertyFragment extends Fragment {
 
@@ -32,6 +33,8 @@ public class PropertyFragment extends Fragment {
         FragmentManager fm = getChildFragmentManager();
         Fragment scan = fm.findFragmentById(R.id.fragment_scan);
         CardAddressFragment cardAddress = (CardAddressFragment) fm.findFragmentById(R.id.fragment_card_address);
+        CardLandlordFragment cardLandlord = (CardLandlordFragment) fm.findFragmentById(R.id.fragment_card_landlord);
+        Fragment vehicleList = fm.findFragmentById(R.id.fragment_vehicle_list);
 
         if (scan == null) {
             fm.beginTransaction().add(R.id.fragment_scan, new ScanFragment()).commit();
@@ -42,12 +45,28 @@ public class PropertyFragment extends Fragment {
             fm.beginTransaction().add(R.id.fragment_card_address, cardAddress).commit();
         }
 
+        if (cardLandlord == null) {
+            cardLandlord = new CardLandlordFragment();
+            fm.beginTransaction().add(R.id.fragment_card_landlord, cardLandlord).commit();
+        }
+
+        if (vehicleList == null) {
+            VehicleListFragment vehicleListFragment = new VehicleListFragment();
+            Bundle args = new Bundle();
+            args.putString("propertyId", propertyId);
+            vehicleListFragment.setArguments(args);
+            fm.beginTransaction().add(R.id.fragment_vehicle_list, vehicleListFragment).commit();
+        }
+
         final CardAddressFragment finalCardAddress = cardAddress;
+        final CardLandlordFragment finalCardLandlord = cardLandlord;
+
         viewModel = new PropertyViewModel(propertyId);
         viewModel.getProperty().observe(getViewLifecycleOwner(), new Observer<Property>() {
             @Override
             public void onChanged(Property property) {
                 finalCardAddress.setAddress(property.data.address);
+                finalCardLandlord.setLandlord(property.data.landlord);
             }
         });
 
