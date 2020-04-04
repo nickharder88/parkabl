@@ -21,12 +21,6 @@ public class VehicleHolder extends RecyclerView.ViewHolder {
         mModel = itemView.findViewById(R.id.vehicle_model);
         mLicense = itemView.findViewById(R.id.vehicle_license);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_updateVehicleFragment);
-            }
-        });
     }
 
     public void bind(VehicleDTO vehicle) {
