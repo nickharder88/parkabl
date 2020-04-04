@@ -39,7 +39,8 @@ public class VehicleListFragment extends Fragment {
     private RecyclerView.Adapter updateUI() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query query = db.collection(Vehicle.collection).where();
+        // TODO PICK UP HERE
+        Query query = db.collection(Vehicle.collection);
 
         // Get Property
         // Get Tenants At Property
