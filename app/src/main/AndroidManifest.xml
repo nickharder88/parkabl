@@ -60,6 +60,7 @@
             android:label="@string/login_title"/>
         <activity android:name=".ui.main.home.HomeFragment"
             android:screenOrientation="portrait"
+            android:label="@string/menu_home"
             />
         <activity
             android:name=".ui.welcome.WelcomeActivity"
