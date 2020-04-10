@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">parkabl</string>
+    <string name="welcome">Bienvenido a parkabl</string>
+
+    <string name="login_button">Iniciar sesión</string>
+
+    <string name="scan_button">Escanear una matrícula</string>
+    <string name="license_check_title">Matrícula comprobada</string>
+    <string name="bad_license_check">Vehículo no encontrado</string>
+    <string name="good_license_check">Vehículo encontrado</string>
+
+    <string name="login_title">Iniciar sesión</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in_short">Registrarse</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="invalid_password">La contraseña debe tener más de cinco caracteres.</string>
+    <string name="login_failed">"error de inicio de sesion"</string>
+
+    <string name="new_vehicle">Nuevo vehículo</string>
+    <string name="show_vehicles">Mostrar vehículos</string>
+
+    <!-- Vehicle -->
+    <string name="make">Hacer</string>
+    <string name="model">Modelo</string>
+    <string name="license">Licencia</string>
+    <string name="location">Habla a</string>
+    <string name="create_vehicle_button">Crear vehículo</string>
+    <string name="update_vehicle_button">Actualizar vehículo</string>
+    <string name="delete_vehicle_button">Eliminar vehículo</string>
+
+    <string name="plate_verification_title">Verificación de matrícula</string>
+    <string name="plate_verification_hint">Numero de licencia</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="title_activity_main">parkabl</string>
+    <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
+    <string name="navigation_drawer_close">Cerrar el cajón de navegación</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Encabezado de navegación</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="logout">Cerrar sesión</string>
+
+    <string name="menu_map">Mapa</string>
+    <string name="menu_home">Hogar</string>
+    <string name="title_activity_home_next">Hogar</string>
+    <string name="view_property">Ver propiedad</string>
+</resources>
