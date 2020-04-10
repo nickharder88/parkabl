@@ -34,7 +34,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
-    <string name="title_activity_main">Actividad principal</string>
+    <string name="title_activity_main">parkabl</string>
     <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
     <string name="navigation_drawer_close">Cerrar el cajón de navegación</string>
     <string name="nav_header_title">Android Studio</string>
