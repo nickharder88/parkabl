@@ -36,7 +36,7 @@ public class VehicleRepository {
         Map<String, Object> data = new HashMap<>();
         data.put("make", vehicle.make);
         data.put("model", vehicle.model);
-        data.put("license", vehicle.license);
+        data.put("license", vehicle.licensePlateNum);
 
         db.collection("vehicles")
                 .add(data)
@@ -57,7 +57,7 @@ public class VehicleRepository {
     }
 
     public void update(final VehicleDTO vehicle) {
-        db.collection("vehicles").whereEqualTo("license", vehicle.license)
+        db.collection("vehicles").whereEqualTo("licensePlateNum", vehicle.licensePlateNum)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -66,7 +66,7 @@ public class VehicleRepository {
                             Map<String, Object> data = new HashMap<>();
                             data.put("make", vehicle.make);
                             data.put("model", vehicle.model);
-                            data.put("license", vehicle.license);
+                            data.put("license", vehicle.licensePlateNum);
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 document.getReference().set(data)
@@ -93,9 +93,9 @@ public class VehicleRepository {
 
     }
 
-    public void delete(final String license) {
+    public void delete(final String licensePlateNum) {
         Log.d(TAG, "Deleting vehicle...");
-        db.collection("vehicles").whereEqualTo("license", license)
+        db.collection("vehicles").whereEqualTo("licensePlateNum", licensePlateNum)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

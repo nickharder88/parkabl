@@ -47,4 +47,5 @@
     <string name="menu_home">Home</string>
     <string name="title_activity_home_next">Home</string>
     <string name="view_property">View Property</string>
+    <string name="vehicles">Vehicles</string>
 </resources>

@@ -47,4 +47,5 @@
     <string name="menu_home">Hogar</string>
     <string name="title_activity_home_next">Hogar</string>
     <string name="view_property">Ver propiedad</string>
+    <string name="vehicles">Vehiculos</string>
 </resources>

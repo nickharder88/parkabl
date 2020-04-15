@@ -24,7 +24,6 @@
                 android:layout_marginTop="8dp"
                 android:text="Landlord"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="?android:attr/textColorSecondary"
             />
             <RelativeLayout
                 android:layout_width="fill_parent"

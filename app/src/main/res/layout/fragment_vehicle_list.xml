@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/vehicle_recycler_view">
-
-</androidx.recyclerview.widget.RecyclerView>
+    android:layout_marginTop="8dp"
+>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/vehicles"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+    />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vehicle_recycler_view"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="600dp">
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

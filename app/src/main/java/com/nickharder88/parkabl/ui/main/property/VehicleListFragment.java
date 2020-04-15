@@ -51,15 +51,15 @@ public class VehicleListFragment extends Fragment {
                 .setLifecycleOwner(this)
                 .build();
 
-        return new FirestoreRecyclerAdapter<VehicleDTO, VehicleHolder>(response) {
+        return new FirestoreRecyclerAdapter<VehicleDTO, VehicleViewHolder>(response) {
             @NonNull
             @Override
-            public VehicleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return new VehicleHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_vehicle, parent, false));
+            public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return new VehicleViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_holder_vehicle, parent, false));
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull VehicleHolder holder, int position, @NonNull VehicleDTO model) {
+            protected void onBindViewHolder(@NonNull VehicleViewHolder holder, int position, @NonNull VehicleDTO model) {
                 holder.bind(model);
             }
         };
