@@ -18,9 +18,7 @@ public class LicenseCheckedFragment extends DialogFragment {
     @Override
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         boolean parked_legally = getArguments().getBoolean(ARG_PARKED);
-
         int layoutToInflate = R.layout.bad_license_check;
         if (parked_legally) {
             layoutToInflate = R.layout.good_license_check;
@@ -37,10 +35,8 @@ public class LicenseCheckedFragment extends DialogFragment {
     public static LicenseCheckedFragment newInstance(boolean parkedLegally) {
         Bundle args = new Bundle();
         args.putBoolean(ARG_PARKED, parkedLegally);
-
         LicenseCheckedFragment fragment = new LicenseCheckedFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 }
