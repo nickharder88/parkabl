@@ -23,6 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Landlord"
+                android:drawableLeft="@drawable/ic_business_white_24dp"
+                android:drawablePadding="8dp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
             />
             <RelativeLayout
