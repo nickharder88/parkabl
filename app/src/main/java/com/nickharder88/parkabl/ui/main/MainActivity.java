@@ -1,6 +1,9 @@
 package com.nickharder88.parkabl.ui.main;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -8,6 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -62,7 +66,24 @@ public class MainActivity extends AppCompatActivity {
         menuItemLogout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                mFirebaseAuth.signOut();
+                Resources resources = getResources();
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(MainActivity.this);
+                builder
+                        .setTitle(resources.getString(R.string.confirm_title_logout))
+                        .setMessage(resources.getString(R.string.confirm_message_logout))
+                        .setNegativeButton(resources.getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Nothing
+                            }
+                        })
+                        .setPositiveButton(resources.getString(R.string.continue_text), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mFirebaseAuth.signOut();
+                            }
+                        })
+                        .show();
                 return true;
             }
         });

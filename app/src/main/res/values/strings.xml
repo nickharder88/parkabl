@@ -3,6 +3,10 @@
     <string name="welcome">Welcome to parkabl</string>
 
     <string name="login_button">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_text">Continue</string>
+    <string name="confirm_title_logout">Logout?</string>
+    <string name="confirm_message_logout">Are you sure you want to logout?</string>
 
     <string name="scan_button">Scan a License Plate</string>
     <string name="license_check_title">License Plate Checked</string>

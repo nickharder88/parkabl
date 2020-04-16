@@ -3,6 +3,10 @@
     <string name="welcome">Bienvenido a parkabl</string>
 
     <string name="login_button">Iniciar sesión</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_text">Seguir</string>
+    <string name="confirm_title_logout">Cerrar Sesion?</string>
+    <string name="confirm_message_logout">¿Estás seguro de que quieres cerrar sesión?</string>
 
     <string name="scan_button">Escanear una matrícula</string>
     <string name="license_check_title">Matrícula comprobada</string>
