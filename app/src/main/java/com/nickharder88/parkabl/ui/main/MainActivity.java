@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,10 +22,18 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.nickharder88.parkabl.R;
+import com.nickharder88.parkabl.data.model.Admin;
 import com.nickharder88.parkabl.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView mNavHeaderTitle;
+    private TextView mNavHeaderSubtitle;
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth.AuthStateListener authListener;
@@ -38,12 +48,27 @@ public class MainActivity extends AppCompatActivity {
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
                     startActivity(intent);
+                } else {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection(Admin.collection).whereEqualTo("authUID", user.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            DocumentSnapshot snap = queryDocumentSnapshots.getDocuments().get(0);
+                            if (snap != null) {
+                                Admin admin = snap.toObject(Admin.class);
+                                if (admin != null) {
+                                    mNavHeaderTitle.setText(admin.name);
+                                    mNavHeaderSubtitle.setText(admin.email);
+                                }
+                            }
+                        }
+                    });
                 }
             }
         };
-        mFirebaseAuth.addAuthStateListener(authListener);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -51,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        mNavHeaderTitle = navigationView.getHeaderView(0).findViewById(R.id.nav_header_title);
+        mNavHeaderSubtitle = navigationView.getHeaderView(0).findViewById(R.id.nav_header_subtitle);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -87,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+        // Start Listening
+        mFirebaseAuth.addAuthStateListener(authListener);
     }
 
     @Override
