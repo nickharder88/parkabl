@@ -24,12 +24,10 @@ public class LicenseVerificationFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        String plate = (String) getArguments().getSerializable(ARG_PLATE);
-
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.license_number_verification, null);
 
         mPlate = v.findViewById(R.id.plate_number);
-        mPlate.getEditText().setText(plate);
+        mPlate.getEditText().setText((String) getArguments().getSerializable(ARG_PLATE));
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
@@ -37,8 +35,7 @@ public class LicenseVerificationFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String plate = mPlate.getEditText().getText().toString();
-                        sendResult(Activity.RESULT_OK, plate);
+                        sendResult(Activity.RESULT_OK, mPlate.getEditText().getText().toString());
                     }
                 })
                 .create();

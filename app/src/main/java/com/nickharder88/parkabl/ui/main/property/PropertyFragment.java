@@ -24,8 +24,7 @@ public class PropertyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_property, container, false);
 
-        final String propertyId = getArguments().getString("propertyId");
-        if (propertyId == null) {
+        if (getArguments().getString("propertyId") == null) {
             throw new Error("Expected Property Id to be passed to Property Fragment");
         }
 
@@ -53,7 +52,7 @@ public class PropertyFragment extends Fragment {
         if (vehicleList == null) {
             VehicleListFragment vehicleListFragment = new VehicleListFragment();
             Bundle args = new Bundle();
-            args.putString("propertyId", propertyId);
+            args.putString("propertyId", getArguments().getString("propertyId"));
             vehicleListFragment.setArguments(args);
             fm.beginTransaction().add(R.id.fragment_vehicle_list, vehicleListFragment).commit();
         }
@@ -61,7 +60,7 @@ public class PropertyFragment extends Fragment {
         final CardAddressFragment finalCardAddress = cardAddress;
         final CardLandlordFragment finalCardLandlord = cardLandlord;
 
-        viewModel = new PropertyViewModel(propertyId);
+        viewModel = new PropertyViewModel(getArguments().getString("propertyId"));
         viewModel.getProperty().observe(getViewLifecycleOwner(), new Observer<Property>() {
             @Override
             public void onChanged(Property property) {
