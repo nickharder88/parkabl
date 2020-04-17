@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -64,7 +65,7 @@ public class ScanFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_CAMERA) {
-            if (permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (permissions[0].equals(Manifest.permission.CAMERA) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dangerouslyInitializeScan();
             }
         }
@@ -81,46 +82,46 @@ public class ScanFragment extends Fragment {
                 Log.i(TAG, "Error Loading Image with Firebase");
             }
 
-            FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
-            detector.processImage(image)
-                            .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-                                @Override
-                                public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                                    String allText = firebaseVisionText.getText();
-                                    Log.i(TAG, allText);
-                                    LicenseVerificationFragment dialog = LicenseVerificationFragment.newInstance(allText);
-                                    dialog.setTargetFragment(ScanFragment.this, REQUEST_VERIFICATION);
-                                    dialog.show(manager, TAG);
-                                }
-                            })
-                            .addOnFailureListener(
-                                    new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.i(TAG, "Image Firebase Failed");
-                                        }
-                                    });
+            if (image != null) {
+                FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
+                detector.processImage(image)
+                        .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                            @Override
+                            public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                                String allText = firebaseVisionText.getText();
+                                LicenseVerificationFragment dialog = LicenseVerificationFragment.newInstance(allText);
+                                dialog.setTargetFragment(ScanFragment.this, REQUEST_VERIFICATION);
+                                dialog.show(manager, TAG);
+                            }
+                        })
+                        .addOnFailureListener(
+                                new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.i(TAG, "Image Firebase Failed");
+                                    }
+                                });
+
+            }
         } else if (requestCode == REQUEST_VERIFICATION && resultCode == RESULT_OK) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             String allText = (String) data.getSerializableExtra(LicenseVerificationFragment.EXTRA_PLATE);
             db.collection("vehicles")
-                    .whereEqualTo("license", allText)
+                    .whereEqualTo("licensePlateNum", allText)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.d(TAG, document.getId() + " => " + document.getData());
-                                    if (document.getData().size() == 0) {
-                                        // Failure
-                                        LicenseCheckedFragment dialog = LicenseCheckedFragment.newInstance(false);
-                                        dialog.show(manager, TAG);
-                                    } else {
-                                        // Success
-                                        LicenseCheckedFragment dialog = LicenseCheckedFragment.newInstance(true);
-                                        dialog.show(manager, TAG);
-                                    }
+                                QuerySnapshot snap = task.getResult();
+                                if (snap == null || snap.getDocuments().size() == 0) {
+                                    // Failure
+                                    LicenseCheckedFragment dialog = LicenseCheckedFragment.newInstance(false);
+                                    dialog.show(manager, TAG);
+                                } else {
+                                    // Success
+                                    LicenseCheckedFragment dialog = LicenseCheckedFragment.newInstance(true);
+                                    dialog.show(manager, TAG);
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());
@@ -170,7 +171,7 @@ public class ScanFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             dangerouslyInitializeScan();
         } else {
-            requestPermissions(new String[]{ Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
         }
     }
 }

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.SnapshotParser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.nickharder88.parkabl.R;
@@ -46,12 +48,18 @@ public class VehicleListFragment extends Fragment {
         // Get Tenants At Property
         // Get Vehicles for each Tenant
 
-        FirestoreRecyclerOptions<VehicleDTO> response = new FirestoreRecyclerOptions.Builder<VehicleDTO>()
-                .setQuery(query, VehicleDTO.class)
+        FirestoreRecyclerOptions<Vehicle> response = new FirestoreRecyclerOptions.Builder<Vehicle>()
+                .setQuery(query, new SnapshotParser<Vehicle>() {
+                    @NonNull
+                    @Override
+                    public Vehicle parseSnapshot(@NonNull DocumentSnapshot documentSnapshot) {
+                        return new Vehicle(documentSnapshot.getId(), documentSnapshot.toObject(VehicleDTO.class));
+                    }
+                })
                 .setLifecycleOwner(this)
                 .build();
 
-        return new FirestoreRecyclerAdapter<VehicleDTO, VehicleViewHolder>(response) {
+        return new FirestoreRecyclerAdapter<Vehicle, VehicleViewHolder>(response) {
             @NonNull
             @Override
             public VehicleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,7 +67,7 @@ public class VehicleListFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull VehicleViewHolder holder, int position, @NonNull VehicleDTO model) {
+            protected void onBindViewHolder(@NonNull VehicleViewHolder holder, int position, @NonNull Vehicle model) {
                 holder.bind(model);
             }
         };

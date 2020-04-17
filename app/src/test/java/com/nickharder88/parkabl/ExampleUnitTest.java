@@ -9,6 +9,9 @@ import com.nickharder88.parkabl.data.model.Landlord;
 import com.nickharder88.parkabl.data.model.Property;
 import com.nickharder88.parkabl.data.model.Tenant;
 
+import com.nickharder88.parkabl.data.dto.VehicleDTO;
+import com.nickharder88.parkabl.data.model.Vehicle;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -20,8 +23,19 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void create_vehicle() {
+        String id = "01";
+        VehicleDTO data = new VehicleDTO();
+        data.make = "Toyota";
+        data.model = "Corolla";
+        data.licensePlateNum = "1234";
+        data.state = "OH";
+        Vehicle v = new Vehicle(id, data);
+        assertEquals("01", v.id);
+        assertEquals("Toyota", v.data.make);
+        assertEquals("Corolla", v.data.model);
+        assertEquals("1234", v.data.licensePlateNum);
+        assertEquals("OH", v.data.state);
     }
 
     @Test

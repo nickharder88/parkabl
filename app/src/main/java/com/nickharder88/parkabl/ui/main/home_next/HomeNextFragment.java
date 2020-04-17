@@ -113,6 +113,7 @@ public class HomeNextFragment extends Fragment implements OnMapReadyCallback, On
         // Hide Property Card
         setPropertyCard(null, null);
 
+        checkLocationPermissions();
 
         // Create Location Request
         mLocationRequest = new LocationRequest();
@@ -264,11 +265,18 @@ public class HomeNextFragment extends Fragment implements OnMapReadyCallback, On
         }
     }
 
-    private void getLastLocation() {
+    private boolean checkLocationPermissions() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION);
+        return false;
+    }
+
+    private void getLastLocation() {
+        if (checkLocationPermissions()) {
             this.dangerouslyGetLastLocation();
-        } else {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION);
         }
     }
 
